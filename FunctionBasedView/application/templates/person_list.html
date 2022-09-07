@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between mt-3">
+    <div>
+        <h4 class="text-danger">List of Person</h4>
+    </div>
+    <div>
+        <a href="{% url 'application:PersonCreateView' %}" class="btn btn-sm btn-success">Create</a>
+    </div>
+</div>
+<table class="table table-sm table-light table-strip table-hover mt-3">
+    <thead class="table-secondary">
+        <tr>
+            <th>Person</th>
+            <th style="width: 4%;">Detail</th>
+            <th style="width: 4%;">Update</th>
+            <th style="width: 4%;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td class="text-primary">{{ object }}</td>
+                <td><a href="{{ object.get_detail_url }}" class="btn btn-sm btn-secondary button_detail">Detail</a></td>
+                <td><a href="{{ object.get_update_url }}" class="btn btn-sm btn-warning button_update">Update</a></td>
+                <td><a href="{{ object.get_delete_url }}" class="btn btn-sm btn-danger button_delete">Delete</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" class="text-danger" style="text-align: center;">No data found to display.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

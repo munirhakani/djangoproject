@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between mt-3">
+    <div>
+        <h4 class="text-danger">Deleting ...</h4>
+    </div>
+    <div>
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-sm btn-secondary">Back</a>
+    </div>
+</div>
+<div class="mt-3">
+    <form method="post">
+        {% csrf_token %}
+        <span class="text-danger fs-2">Are you sure to delete ?</span>
+        <br>
+        <table class="table table-sm table-secondary table-bordered border-primary mt-3">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Person</th>
+                    <td>{{ object }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-sm btn-danger">Submit</button>
+    </form>
+</div>
+{% endblock content %}
