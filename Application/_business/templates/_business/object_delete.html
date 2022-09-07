@@ -1,0 +1,27 @@
+<form action="{{ object.get_delete_url }}" method="post" class="DeleteForm">
+    
+    {% csrf_token %}
+    <input type="hidden" name="pagenumber" value="">
+    <input type="hidden" name="sortby" value="">
+    <input type="hidden" name="find" value="">
+    <script>
+        document.querySelector('[name=pagenumber]').value = document.querySelector('[name=hidden_pagenumber]').value;
+        document.querySelector('[name=sortby]').value = document.querySelector('[name=button_sortby]').value;
+        document.querySelector('[name=find]').value = document.querySelector('[name=button_find]').value;
+    </script>
+
+    <div class="modal-header">
+        <h3 class="text-danger">Are you sure to delete ?</h3>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body" id="crudModalBody">
+        {% with path=request.resolver_match.app_name %}
+            {% include path|add:'/object_object.html' %}
+        {% endwith %}
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal">Close</button>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+body {
+    margin-top: 3.5rem;
+    /* font-size: large; */
+}
+
+.bg-steel {
+    background-color: #5f788a;
+}
+
+
+.navbar-nav .nav-link {
+    font-weight: 200;
+    color: #cbd5db;
+}
+
+/* #ffffff */
+/* lightslategrey */
+.navbar-nav .nav-link:hover {
+    font-weight: 500;
+    color:#1e2125;
+    background-color:#e9ecef;
+}
+
+/* .modal-ku {
+    width: 6400px;
+    margin: auto;
+} */

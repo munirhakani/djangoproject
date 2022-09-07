@@ -1,0 +1,75 @@
+{% include 'messages.html' %}
+<div class="d-flex justify-content-between mt-3">
+    <div>
+        <h4 class="text-primary">List of Business</h4>
+    </div>
+    <div>
+        <button class="btn btn-sm btn-primary button_create" data-url="create/" data-bs-toggle="modal" data-bs-target="#objectModal" accesskey="+">Create</button>
+        {% if find %}
+            <button class="btn btn-sm btn-warning button_action" id="button_clearfind" data-url="list/?page=1&sortby=name&find="><strong>Clear Finding</strong> {{ find }}</button>
+            <script>
+                $("#button_clearfind").html($("#button_clearfind").html().replace('__icontains', ''));
+            </script>
+        {% endif %}
+        <button class="btn btn-sm btn-dark button_find" data-url="find/" data-bs-toggle="modal" data-bs-target="#objectModal" name="button_find" value="{{ find }}">Find</button>
+        <button class="btn btn-sm btn-dark dropdown-toggle" data-bs-toggle="dropdown" name="button_sortby" value="{{ sortby }}">Sort by</button>
+        <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+            <button class="dropdown-item button_action" data-url="list/?page=1&sortby=-id&find={{ find }}">
+                {% if sortby == '-id' %}<span class="text-warning">Newest Created</span>{% else %}Newest Created{% endif %}
+            </button>
+            <button class="dropdown-item button_action" data-url="list/?page=1&sortby=id&find={{ find }}">
+                {% if sortby == 'id' %}<span class="text-warning">Newest Created (Descending)</span>{% else %}Newest Created (Descending){% endif %}
+            </button>
+            <button class="dropdown-item button_action" data-url="list/?page=1&sortby=name&find={{ find }}">
+                {% if sortby == 'name' %}<span class="text-warning">Alphabetically</span>{% else %}Alphabetically{% endif %}
+            </button>
+            <button class="dropdown-item button_action" data-url="list/?page=1&sortby=-name&find={{ find }}">
+                {% if sortby == '-name' %}<span class="text-warning">Alphabetically (Descending)</span>{% else %}Alphabetically (Descending){% endif %}
+            </button>
+        </div>
+    </div>
+</div>
+<table id="tableList" class="table table-sm table-light table-strip table-hover mt-2">
+    <thead class="table-primary">
+        <tr>
+            <th>Business</th>
+            <th style="width: 4%;">Detail</th>
+            <th style="width: 4%;">Update</th>
+            <th style="width: 4%;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.name }}</td>
+                <td><button class="btn btn-sm btn-outline-secondary button_detail" data-url="{{ object.get_detail_url }}" data-bs-toggle="modal" data-bs-target="#objectModal">Detail</button></td>
+                <td><button class="btn btn-sm btn-outline-dark button_update" data-url="{{ object.get_update_url }}" data-bs-toggle="modal" data-bs-target="#objectModal">Update</button></td>
+                <td><button class="btn btn-sm btn-outline-danger button_delete" data-url="{{ object.get_delete_url }}" data-bs-target="#objectModal">Delete</button></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" class="text-danger" style="text-align: center;">No data found to display.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="d-flex justify-content-center">
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <button class="btn btn-sm btn-outline-secondary button_action" data-url="list/?page=1&sortby={{ sortby }}&find={{ find }}">First</button>
+            <button class="btn btn-sm btn-outline-secondary button_action" data-url="list/?page={{ page_obj.previous_page_number }}&sortby={{ sortby }}&find={{ find }}">Previous</button>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <button class="btn btn-sm btn-secondary button_action" data-url="list/?page={{ num }}&sortby={{ sortby }}&find={{ find }}">{{ num }}</button>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <button class="btn btn-sm btn-outline-secondary button_action" data-url="list/?page={{ num }}&sortby={{ sortby }}&find={{ find }}">{{ num }}</button>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <button class="btn btn-sm btn-outline-secondary button_action" data-url="list/?page={{ page_obj.next_page_number }}&sortby={{ sortby }}&find={{ find }}">Next</button>
+            <button class="btn btn-sm btn-outline-secondary button_action" data-url="list/?page={{ page_obj.paginator.num_pages }}&sortby={{ sortby }}&find={{ find }}">Last</button>
+        {% endif %}
+    {% endif %}
+</div>
+<input type="hidden" id="hidden_pagenumber" name="hidden_pagenumber" value="{{ page_obj.number }}">

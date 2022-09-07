@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <div id="object_list">
+        <h1 class="text-danger">Loading ...</h1>
+    </div>
+    <script>
+        $.ajax({
+            url: "list/",
+            type: 'get',
+            success: function (data) {
+                $("#object_list").html(data);
+            }
+        });
+    </script>
+</div>
+{% endblock content %}

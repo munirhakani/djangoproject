@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+    <ul>
+        <li><a href="javascript:void(0);" class="button_create" data-url="{% url '_accounttype:ObjectCreateView' %}" data-bs-toggle="modal" data-bs-target="#objectModal">Account Type</a></li>
+        <li><a href="javascript:void(0);" class="button_create" data-url="{% url '_account:ObjectCreateView' %}" data-bs-toggle="modal" data-bs-target="#objectModal">Account</a></li>
+        <li><a href="javascript:void(0);" class="button_create" data-url="{% url '_business:ObjectCreateView' %}" data-bs-toggle="modal" data-bs-target="#objectModal">Business</a></li>
+        <li><a href="javascript:void(0);" class="button_create" data-url="{% url '_transaction:ObjectDetailView' pk=1 %}" data-bs-toggle="modal" data-bs-target="#objectModalXl">Transaction # 1</a></li>
+    </ul>
+{% else %}
+    <h3 class="text-danger">Please Login before testing</h3>
+{% endif %}
+{% endblock content %}

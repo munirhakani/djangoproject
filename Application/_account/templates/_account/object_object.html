@@ -1,0 +1,22 @@
+<table class="table table-sm table-secondary table-bordered border-dark">
+    <tbody>
+        <tr>
+            <th style="width: 30%;">Account</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        {% if object.parent %}
+            <tr>
+                <th style="width: 30%;">Sub Account of</th>
+                <td>{{ object.parent.name }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th style="width: 30%;">Account Type</th>
+            <td>{{ object.accounttype.name }}</td>
+        </tr>
+        <tr>
+            <th style="width: 30%;">Balance</th>
+            <td>{{ object.get_balance }}</td>
+        </tr>
+    </tbody>
+</table>

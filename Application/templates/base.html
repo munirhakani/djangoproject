@@ -1,0 +1,35 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>django Application</title>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</head>
+<!-- #f5f5f7 -->
+<!-- #e3f2fd -->
+<!-- style="background-color:#ced4da;" -->
+<!--  -->
+<body id="bodybase" class="bg-dark">
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        {% include 'messages.html' %}
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <!-- %}{% include 'learning.html'  -->
+    {% include 'modal.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</body>
+</html>

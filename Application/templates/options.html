@@ -1,0 +1,4 @@
+<option value="">Click/Press &lt;SPACE&gt; to display options</option>
+{% for object in object_list %}
+    <option value="{{ object.pk }}">{{ object.name }}</option>
+{% endfor %}

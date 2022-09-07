@@ -1,0 +1,61 @@
+{% load humanize %}
+<table class="table table-sm table-borderless">
+    <tbody>
+        <tr>
+            <th style="width: 15%;">Created Date/Time</th>
+            <td>{{ object.created }}</td>
+        </tr>
+        <tr>
+            <th style="width: 15%;">Updated Date/Time</th>
+            <td>{{ object.updated }}</td>
+        </tr>
+        <tr>
+            <th style="width: 15%;">User Name</th>
+            <td>{{ object.user.last_name }}, {{ object.user.first_name }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<h5 class="text-secondary">Accounts</h5>
+<table class="table table-sm table-strip table-hover table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th>Account</th>
+            <th class="text-end">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for accounts in accounts_object_list %}
+            <tr>
+                <td>{{ accounts.account.name }}</td>
+                {% if accounts.amount >= 0 %}
+                    <td class="text-end">{{ accounts.amount|intcomma }}</td>
+                {% else %}
+                    <td class="text-end text-danger">{{ accounts.amount|intcomma|slice:"1:" }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<h5 class="text-secondary">Notes</h5>
+<table class="table table-sm table-strip table-hover table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th>Notes</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>UserName</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for notes in notes_object_list %}
+            <tr>
+                <td>{{ notes.notes }}</td>
+                <td>{{ notes.created }}</td>
+                <td>{{ notes.updated }}</td>
+                <td>{{ notes.user.last_name }}, {{ notes.user.first_name }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
